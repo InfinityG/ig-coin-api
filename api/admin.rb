@@ -1,0 +1,27 @@
+require 'sinatra'
+require_relative '../api/auth'
+
+# class Admin < Authorization
+  #create new admin token: login
+  post '/admin/tokens' do
+    'Create admin user login token'
+  end
+
+#assign rewards to user
+  post '/admin/users/:userId/rewards' do
+    "Assign rewards to user #{params[:userId]}"
+  end
+
+#get user rewards balance
+  get '/admin/users/:userId/rewards' do
+    "Get user rewards balance for #{params[:userId]}"
+  end
+
+#get user redemption status
+  get '/admin/users/{userId}/redemptions' do
+    userId = params[:userId]
+    # matches "GET /admin/users/{userId}/redemptions?status={status}"
+    status = params[:status]
+    "Get user redemption status for user #{userId} and status #{status}"
+  end
+# end
