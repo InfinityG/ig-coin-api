@@ -6,6 +6,7 @@ class UserRepositoryTest < Test::Unit::TestCase
   # to set up fixture information.
   def setup
     # Do nothing
+    # New line test
   end
 
   # Called after every test method runs. Can be used to tear
