@@ -1,13 +1,10 @@
-require 'sinatra'
+require 'sinatra/base'
+require_relative './api/users'
+require_relative './api/admin'
 
-require_relative 'api/auth'
-require_relative 'api/admin'
-require_relative 'api/users'
+class ApiApp < Sinatra::Base
+  use Users
+  use Admin
 
-
-# configure do
-#   $u = Users.new
-#   $a = Admin.new
-#
-#
-# end
+  run! if app_file == $0
+end

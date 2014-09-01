@@ -1,20 +1,17 @@
 require 'sinatra'
 require_relative '../api/auth'
 
-# class Users < Sinatra::Base
+ class Users < Authorization
   #create new user: register
   post '/users' do
     'Register new user'
   end
 
-#create new token: login
-  post '/tokens' do
-    'Create user login token'
-  end
+
 
 #get user details
   get '/users/:userId' do
-    "Get user details for #{params[:userId]}"
+    "Get user details for ` `#{params[:userId]}"
   end
 
 #get user's rewards
@@ -27,4 +24,4 @@ require_relative '../api/auth'
     "Get users rewards balance for #{params[:userId]}"
   end
 
-# end
+ end

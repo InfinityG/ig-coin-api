@@ -1,7 +1,7 @@
 require 'sinatra'
 require_relative '../api/auth'
 
-# class Admin < Authorization
+class Admin < Authorization
   #create new admin token: login
   post '/admin/tokens' do
     'Create admin user login token'
@@ -24,4 +24,4 @@ require_relative '../api/auth'
     status = params[:status]
     "Get user redemption status for user #{userId} and status #{status}"
   end
-# end
+ end
