@@ -1,5 +1,5 @@
-require '../../api/models/user'
-require '../../api/models/token'
+require './api/models/user'
+require './api/models/token'
 
 class TokenRepository
   def create(user_id, uuid, timestamp)
@@ -12,9 +12,10 @@ class TokenRepository
   end
 
   def get (uuid)
-    #TODO: get the token from the DB
-    token = Token(Token.new)
+    #TODO: get the token from the DB - this is a dummy
+    token = Token.new
     token.uuid = uuid
+    token.expires = (Time.now. + (60 * 60)).to_i
     token
   end
 

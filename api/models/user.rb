@@ -1,60 +1,13 @@
+require 'data_mapper'
+
 class User
-  def id=(value)
-    @id = value
-  end
+  include DataMapper::Resource
 
-  def id
-    @id
-  end
-
-  def first_name=(value)
-    @first_name = value
-  end
-
-  def first_name
-    @first_name
-  end
-
-  def last_name=(value)
-    @last_name = value
-  end
-
-  def last_name
-    @last_name
-  end
-
-  def email=(value)
-    @email = value
-  end
-
-  def email
-    @email
-  end
-
-  def username=(value)
-    @username = value
-  end
-
-  def username
-    @username
-  end
-
-  def password_hash=(value)
-    @password_hash = value
-  end
-
-  def password_hash
-    @password_hash
-  end
-
-  def password_salt(value)
-    @password_salt = value
-  end
-
-  def password_salt
-    @password_salt
-  end
-
-
+  property :id, Serial, :key => false
+  property :first_name, String, :required => true
+  property :last_name, String, :required => true
+  property :username, String, :required => true, :key => true
+  property :password_hash, String
+  property :password_salt, String
 
 end

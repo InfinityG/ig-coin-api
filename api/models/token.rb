@@ -1,33 +1,12 @@
+require 'data_mapper'
+
 class Token
-  def id=(value)
-    @id = value
-  end
 
-  def id
-    @id
-  end
+  include DataMapper::Resource
 
-  def user_id=(value)
-    @user_id = value
-  end
+  property :id, Serial, :key => false
+  property :user_id, Integer
+  property :uuid, String,  :key => true
+  property :expires, Integer
 
-  def user_id
-    @user_id
-    end
-
-  def uuid=(value)
-    @uuid = value
-  end
-
-  def uuid
-    @uuid
-    end
-
-  def expires=(value)
-    @expires = value
-  end
-
-  def expires
-    @expires
-  end
 end

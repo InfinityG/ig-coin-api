@@ -1,10 +1,20 @@
 require 'sinatra/base'
-require_relative './api/users'
-require_relative './api/admin'
+require 'data_mapper'
+require 'dm-sqlite-adapter'
+require './api/routes/users'
+require './api/routes/admin'
+require './api/routes/tokens'
+require './api/routes/auth'
 
 class ApiApp < Sinatra::Base
-  use Users
-  use Admin
 
-  run! if app_file == $0
+  #register routes
+  register Sinatra::AuthRoutes
+  register Sinatra::AdminRoutes
+  register Sinatra::UserRoutes
+  register Sinatra::TokenRoutes
+
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite")
+  DataMapper.finalize
+  DataMapper.auto_upgrade!
 end
