@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'data_mapper'
 require './api/routes/auth'
+require './api/services/user_service'
 require './api/utils/hash_generator'
 
 module Sinatra
@@ -18,14 +19,14 @@ module Sinatra
 
         if first_name.to_s != '' && last_name.to_s != '' && username.to_s != '' && password.to_s != ''
 
-          user_repository = UserRepository.new
+          user_service = UserService.new
 
-          #return conflict error if user already exists
-          existing_user = user_repository.get username
+          #return conflict error if user already exists (username check)
+          existing_user = user_service.get_by_username username
           return status 409 if existing_user != nil
 
           #create new user
-          user = user_repository.create(first_name, last_name, password, username)
+          user = user_service.create(first_name, last_name, password, username)
           status 201
           return user.to_json
         end
@@ -34,9 +35,13 @@ module Sinatra
       end
 
       #get user details
-      app.get '/users/:userId' do
+      app.get '/users/:user_id' do
         content_type :json
-        "Get user details for ` `#{params[:userId]}"
+
+        user_id =  params[:user_id]
+        user_repository = UserService.new
+        user = user_repository.get_by_id user_id
+        user.to_json
       end
 
       #get user's rewards

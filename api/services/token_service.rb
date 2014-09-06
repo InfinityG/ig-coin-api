@@ -1,5 +1,4 @@
-require './api/repositories/token_repository'
-require './api/repositories/user_repository'
+
 require './api/utils/hash_generator'
 require './api/models/user'
 require './api/models/token'
@@ -11,11 +10,11 @@ class TokenService
   def create_token(username, password)
 
     #get the user first and check if the password matches
-    user = User.get!(username)
+    user = UserService.new.get_by_username username
 
     if user != nil
-      password_salt = user.password_salt
-      password_hash = user.password_hash
+      password_salt = user['password_salt']
+      password_hash = user['password_hash']
 
       #now check if the hash matches the password
       result = HashGenerator.new.generate_hash password, password_salt
