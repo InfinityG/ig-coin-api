@@ -10,5 +10,9 @@ class User
   property :password_hash, String
   property :password_salt, String
   property :gatewayd_user_id, String
+  property :gatewayd_external_account_id, Integer
+  property :gatewayd_tag, Integer
+  property :wallet_address, String
+  property :wallet_secret, String
 
 end

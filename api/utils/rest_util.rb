@@ -11,7 +11,7 @@ class RestUtil
     build_response(response)
   end
 
-  def execute_post(api_uri, json)
+  def execute_post(api_uri, json = '')
     puts "Uri: #{api_uri}"
     puts "Json: #{json}"
 
@@ -29,7 +29,7 @@ class RestUtil
   end
 
   def get_client(uri)
-    RestClient::Resource.new(uri, GATEWAYD_USER, GATEWAYD_KEY)
+    RestClient::Resource.new(uri, GATEWAYD_ADMIN_USER, GATEWAYD_KEY)
   end
 
 end

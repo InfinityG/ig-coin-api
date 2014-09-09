@@ -20,7 +20,7 @@ module Sinatra
             halt 403, 'Unauthorized!'
           end
 
-          token.to_json
+          {:token => token}.to_json
 
         else
           halt 403, 'Unauthorized!'

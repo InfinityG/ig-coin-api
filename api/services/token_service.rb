@@ -13,15 +13,16 @@ class TokenService
     user = UserService.new.get_by_username username
 
     if user != nil
-      password_salt = user['password_salt']
-      password_hash = user['password_hash']
+      password_salt = user[:password_salt]
+      password_hash = user[:password_hash]
 
       #now check if the hash matches the password
-      result = HashGenerator.new.generate_hash password, password_salt
+      hash_generator = HashGenerator.new
+      result = hash_generator.generate_hash password, password_salt
 
       if result == password_hash
         #all good, now save the token for the user
-        uuid = SecureRandom.uuid
+        uuid = hash_generator.generate_uuid
         save_token user.id, uuid
         return uuid
       end
@@ -30,6 +31,11 @@ class TokenService
     end
 
     nil
+  end
+
+  def create_token_for_registration(user_id)
+    token = HashGenerator.new.generate_uuid
+    save_token user_id, token
   end
 
   def get_token(uuid)
@@ -43,7 +49,7 @@ class TokenService
       end
     end
 
-    nil
+    token[:uuid]
   end
 
   private

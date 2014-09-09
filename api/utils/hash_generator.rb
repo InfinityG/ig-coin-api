@@ -9,6 +9,10 @@ class HashGenerator
   end
 
   def generate_salt
+    generate_uuid
+  end
+
+  def generate_uuid
     SecureRandom.uuid
   end
 end

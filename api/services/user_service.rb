@@ -4,6 +4,21 @@ require './api/utils/hash_generator'
 
 class UserService
   def create(first_name, last_name, password, username)
+    ripple_gateway = RippleGateway.new
+
+    #-save the address and secret for the user (secret required for future withdrawals); need to investigate encryption
+    #-use the new address in the register_user step below.
+    wallet_result = ripple_gateway.create_wallet
+
+    wallet_address = wallet_result[:address]
+    wallet_secret = wallet_result[:secret]
+
+    #Create the user on gatewayd, and get the gateway's user id and tag
+    # result = ripple_gateway.register_user user[:username], GATEWAYD_HOT_ADDRESS #NOTE: generate a new wallet each time if required
+    result = ripple_gateway.register_user username, password, wallet_address #NOTE: generate a new wallet each time if required
+    g_user_id = result[:user_id]
+    g_tag = result[:tag]
+    g_ext_account_id = result[:external_account_id]
 
     #create salt and hash
     hash_generator = HashGenerator.new
@@ -11,22 +26,8 @@ class UserService
     hashed_password = hash_generator.generate_hash password, salt
 
     #create user on local db
-    user = User.new(:first_name => first_name,
-                    :last_name => last_name,
-                    :username => username,
-                    :password_salt => salt,
-                    :password_hash => hashed_password)
-
-    user.save
-
-    #now save the user on gatewayd, and get the gateway's user id
-    ripple_gateway = RippleGateway.new
-    gateway_user_id = ripple_gateway.register_user user[:id], user[:username]
-
-    #now update the user on local db with the gatewayd user_id
-    user.update(:gateway_user_id => gateway_user_id)
-
-    user
+    save_user(first_name, last_name, username, hashed_password, salt, g_tag, g_user_id,
+              g_ext_account_id, wallet_address, wallet_secret)
   end
 
   def get_by_id(user_id)
@@ -45,5 +46,23 @@ class UserService
   def delete(username)
     #TODO: delete from the DB - username is the identifier
     raise 'User delete not implemented'
+  end
+
+  ### HELPERS ###
+  private
+  def save_user(first_name, last_name, username, hashed_password, salt, g_tag, g_user_id, g_ext_account_id, wallet_address, wallet_secret)
+    user = User.new(:first_name => first_name,
+                    :last_name => last_name,
+                    :username => username,
+                    :password_salt => salt,
+                    :password_hash => hashed_password,
+                    :gatewayd_user_id => g_user_id,
+                    :gatewayd_tag => g_tag,
+                    :gateway_external_account_id => g_ext_account_id,
+                    :wallet_address => wallet_address,
+                    :wallet_secret => wallet_secret)
+
+    user.save
+    user
   end
 end
