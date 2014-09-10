@@ -18,5 +18,5 @@ class ApiApp < Sinatra::Base
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite")
   DataMapper.finalize
-  DataMapper.auto_upgrade!
+
 end

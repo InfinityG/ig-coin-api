@@ -8,26 +8,59 @@ class UserService
 
     #-save the address and secret for the user (secret required for future withdrawals); need to investigate encryption
     #-use the new address in the register_user step below.
-    wallet_result = ripple_gateway.create_wallet
+    wallet_result = nil
+    wallet_address = nil
+    wallet_secret = nil
 
-    wallet_address = wallet_result[:address]
-    wallet_secret = wallet_result[:secret]
+    begin
+      wallet_result = ripple_gateway.create_wallet
+      wallet_address = wallet_result[:address]
+      wallet_secret = wallet_result[:secret]
+    rescue
+      LOGGER.error $!
+      raise "Unable to create wallet for user #{username}!"
+    end
 
     #Create the user on gatewayd, and get the gateway's user id and tag
-    # result = ripple_gateway.register_user user[:username], GATEWAYD_HOT_ADDRESS #NOTE: generate a new wallet each time if required
-    result = ripple_gateway.register_user username, password, wallet_address #NOTE: generate a new wallet each time if required
-    g_user_id = result[:user_id]
-    g_tag = result[:tag]
-    g_ext_account_id = result[:external_account_id]
+    register_result = nil
+    g_user_id = nil
+    g_tag = nil
+    g_ext_account_id = nil
+
+    begin
+      register_result = ripple_gateway.register_user username, password, wallet_address
+      g_user_id = register_result[:user_id]
+      g_tag = register_result[:tag]
+      g_ext_account_id = register_result[:external_account_id]
+    rescue
+      LOGGER.error "Unable to register user on gatewayd for [#{username} | #{wallet_address} | #{wallet_secret}] || Error: #{$!}"
+      raise "Unable to register user on gatewayd for [#{username} | #{wallet_address} | #{wallet_secret}]"
+    end
+
+    begin
+      #set a trustline between the new user wallet and gatewayd
+      ripple_gateway.create_trust_line(wallet_address, wallet_secret, DEFAULT_TRUST_LIMIT, DEFAULT_CURRENCY, GATEWAYD_HOT_ADDRESS)
+    rescue
+      LOGGER.error "Unable to create trust line! || Error: #{$!}"
+    end
 
     #create salt and hash
     hash_generator = HashGenerator.new
     salt = hash_generator.generate_salt
     hashed_password = hash_generator.generate_hash password, salt
 
-    #create user on local db
-    save_user(first_name, last_name, username, hashed_password, salt, g_tag, g_user_id,
-              g_ext_account_id, wallet_address, wallet_secret)
+    user_result = nil
+
+    begin
+      #create user on local db
+      user_result = save_user(first_name, last_name, username, hashed_password, salt, g_tag, g_user_id,
+                              g_ext_account_id, wallet_address, wallet_secret)
+    rescue
+      LOGGER.error "Unable to save user on database! [#{username} | #{wallet_address} | #{wallet_secret}] || Error: #{$!}"
+      raise "Unable to save user on database! [#{username} | #{wallet_address} | #{wallet_secret} || Error: #{$!}]"
+    end
+
+    user_result
   end
 
   def get_by_id(user_id)
@@ -48,7 +81,7 @@ class UserService
     raise 'User delete not implemented'
   end
 
-  ### HELPERS ###
+### HELPERS ###
   private
   def save_user(first_name, last_name, username, hashed_password, salt, g_tag, g_user_id, g_ext_account_id, wallet_address, wallet_secret)
     user = User.new(:first_name => first_name,
@@ -58,11 +91,12 @@ class UserService
                     :password_hash => hashed_password,
                     :gatewayd_user_id => g_user_id,
                     :gatewayd_tag => g_tag,
-                    :gateway_external_account_id => g_ext_account_id,
+                    :gatewayd_external_account_id => g_ext_account_id,
                     :wallet_address => wallet_address,
                     :wallet_secret => wallet_secret)
 
     user.save
     user
   end
+
 end

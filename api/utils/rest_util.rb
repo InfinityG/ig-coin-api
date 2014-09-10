@@ -29,7 +29,7 @@ class RestUtil
   end
 
   def get_client(uri)
-    RestClient::Resource.new(uri, GATEWAYD_ADMIN_USER, GATEWAYD_KEY)
+    RestClient::Resource.new(uri, :user => GATEWAYD_ADMIN_USER, :password => GATEWAYD_KEY, :timeout => DEFAULT_REQUEST_TIMEOUT)
   end
 
 end

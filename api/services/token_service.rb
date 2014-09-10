@@ -59,5 +59,6 @@ class TokenService
 
     token = Token.new(:user_id => user_id, :uuid => token, :expires => expires.to_i)
     token.save
+    token
   end
 end

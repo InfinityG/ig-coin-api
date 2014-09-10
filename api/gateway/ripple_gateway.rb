@@ -10,12 +10,6 @@ class RippleGateway
   #   @config_util = config_util
   # end
 
-  private
-  def rest_util_instance
-    @rest_util = RestUtil.new if @rest_util == nil
-    @rest_util
-  end
-
   def create_wallet
     uri = "#{GATEWAYD_URI}/v1/wallets/generate"
     result = rest_util_instance.execute_post uri
@@ -117,6 +111,12 @@ class RippleGateway
     if result.response_code != 200 && result.response_code != 201
       raise "#{method_name} failed!"
     end
+  end
+
+  private
+  def rest_util_instance
+    @rest_util = RestUtil.new if @rest_util == nil
+    @rest_util
   end
 
 end

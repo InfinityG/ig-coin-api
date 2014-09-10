@@ -23,11 +23,10 @@ module Sinatra
         end
         status 400
       end
-      end
 
-    # withdrawals effectively send currency from the user's wallet back to the gateway.
-    # this is used for 'redeeming' rewards
-    app.post '/withdrawals' do
+      # withdrawals effectively send currency from the user's wallet back to the gateway.
+      # this is used for 'redeeming' rewards
+      app.post '/withdrawals' do
         data = JSON.parse(request.body.read)
         user_id = data['user_id']
         amount = data['amount']
@@ -48,6 +47,7 @@ module Sinatra
         status 400
       end
 
+    end
   end
   register TransactionRoutes
 end

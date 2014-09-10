@@ -34,7 +34,7 @@ module Sinatra
 
           #final result is simply the user id and the initial auth token
           status 201
-          {:id => user[:id], :token => token}.to_json
+          return {:id => user[:id], :token => token[:uuid]}.to_json
         end
 
         status 400
