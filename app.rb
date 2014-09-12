@@ -10,13 +10,13 @@ require './api/routes/transactions'
 class ApiApp < Sinatra::Base
 
   #register routes
-  register Sinatra::AuthRoutes
-  # register Sinatra::AdminRoutes
+  #register Sinatra::AuthRoutes
   register Sinatra::UserRoutes
   register Sinatra::TokenRoutes
   register Sinatra::TransactionRoutes
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite")
   DataMapper.finalize
+  # DataMapper.auto_migrate!  #creates the tables on first use
 
 end

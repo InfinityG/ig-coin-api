@@ -6,7 +6,7 @@ class RestUtil
     puts "Uri: #{api_uri}"
 
     client = get_client api_uri
-    response = client.get(:content-type => 'application/json;charset=UTF-8', :verify_ssl => false)
+    response = client.get(:content_type => 'application/json;charset=UTF-8', :verify_ssl => false)
 
     build_response(response)
   end

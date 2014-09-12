@@ -44,23 +44,91 @@ module Sinatra
       app.get '/users/:user_id' do
         content_type :json
 
-        user_id =  params[:user_id]
-        user_repository = UserService.new
-        user = user_repository.get_by_id user_id
+        user_id = params[:user_id]
+        user_service = UserService.new
+        user = user_service.get_by_id user_id
         user.to_json
       end
 
-      #get user's rewards
-      app.get '/users/:userId/rewards' do
-        "Get users rewards for #{params[:userId]}"
+      #get user's transactions
+      app.get '/users/:user_id/transactions' do
+
+        user_id = params[:user_id]
+        user_service = UserService.new
+        user = user_service.get_by_id user_id
+
+        if user != nil
+          transaction_service = TransactionService.new
+          result = transaction_service.get_transactions user_id
+
+          trans_arr = []
+
+          result.each { |item|
+            trans_arr << {:id => item[:id], :user_id => item[:user_id], :amount => item[:amount],
+                          :currency => item[:currency], :timestamp => item[:ledger_timestamp], :type => item[:type]}
+          }
+
+          return trans_arr.to_json
+
+        else
+          raise 'User cannot be found!'
+        end
+
       end
 
-      #get user's rewards balance
-      app.get '/users/:userId/rewards/balance' do
-        "Get users rewards balance for #{params[:userId]}"
+      #get single user transaction
+      app.get '/users/:user_id/transactions/:transaction_id' do
+        user_service = UserService.new
+        user = user_service.get_by_id params[:user_id]
+
+        if user != nil
+          transaction_service = TransactionService.new
+          item = transaction_service.get_transaction_by_id params[:user_id], params[:transaction_id]
+          response = {:id => item[:id], :user_id => item[:user_id], :amount => item[:amount],
+                      :currency => item[:currency], :timestamp => item[:ledger_timestamp], :type => item[:type]}
+          return response.to_json
+        else
+          raise 'User cannot be found!'
+        end
+
       end
+
+      #get user's balance
+      app.get '/users/:user_id/balance' do
+        user_id = params[:user_id]
+        user_service = UserService.new
+        user = user_service.get_by_id user_id
+
+        if user != nil
+          transaction_service = TransactionService.new
+          result = transaction_service.get_transactions user_id
+
+          balance = 0
+
+          result.each { |item|
+            item_amount = item[:amount].to_i
+            item_type = item[:type]
+
+            case item_type
+              when 'deposit'
+                balance += item_amount
+              when 'withdrawal'
+                balance -= item_amount
+              else
+                raise 'Unknown transaction type!'
+            end
+
+          }
+
+          return {:user_id => user_id, :balance => balance, :currency => DEFAULT_CURRENCY}.to_json
+
+        else
+          raise 'User cannot be found!'
+        end
+
+      end
+
     end
-
 
   end
   register UserRoutes

@@ -1,3 +1,7 @@
+require './api/services/transaction_service'
+require './api/services/user_service'
+require 'json'
+
 module Sinatra
   module TransactionRoutes
 
@@ -13,10 +17,10 @@ module Sinatra
           user = UserService.new.get_by_id user_id
 
           if user != nil
-            result = TransactionService.new.execute_deposit(user_id, amount)
+            result = TransactionService.new.execute_deposit(user, amount)
 
             status 200 # not 201 as this has just been submitted.
-            return {:success => result}
+            return {:transaction_id => result[:id]}.to_json
           end
           status 400
 
@@ -36,10 +40,10 @@ module Sinatra
           user = UserService.new.get_by_id user_id
 
           if user != nil
-            result = TransactionService.new.execute_withdrawal(user_id, amount)
+            result = TransactionService.new.execute_withdrawal(user, amount)
 
             status 200 # not 201 as this has just been submitted.
-            {:status_url => result}.to_json
+            return {:transaction_id => result[:id]}.to_json
           end
           status 400
 
