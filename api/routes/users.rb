@@ -40,6 +40,15 @@ module Sinatra
         status 400
       end
 
+      #get all users
+      app.get '/users'do
+        content_type :json
+
+        user_service = UserService.new
+        users = user_service.get_all
+        users.to_json
+      end
+
       #get user details
       app.get '/users/:user_id' do
         content_type :json

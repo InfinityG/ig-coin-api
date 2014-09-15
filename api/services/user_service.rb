@@ -17,6 +17,11 @@ class UserService
     end
   end
 
+  #TODO: refactor this to handle paging
+  def get_all
+    User.all
+  end
+
   def get_by_id(user_id)
     User.all(:id => user_id).first
   end
