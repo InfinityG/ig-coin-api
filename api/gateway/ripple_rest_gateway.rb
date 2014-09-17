@@ -79,6 +79,45 @@ class RippleRestGateway
 
   end
 
+  def get_wallet_balances
+    #GET /v1/accounts/{:address}/balances
+    hot_wallet_uri = "#{RIPPLE_REST_URI}/v1/accounts/#{GATEWAY_HOT_WALLET_ADDRESS}/balances"
+    cold_wallet_uri = "#{RIPPLE_REST_URI}/v1/accounts/#{GATEWAY_COLD_WALLET_ADDRESS}/balances"
+    customer_wallet_uri = "#{RIPPLE_REST_URI}/v1/accounts/#{CUSTOMER_WALLET_ADDRESS}/balances"
+
+    hot_result = rest_util_instance.execute_get hot_wallet_uri
+    cold_result = rest_util_instance.execute_get cold_wallet_uri
+    customer_result = rest_util_instance.execute_get customer_wallet_uri
+
+    hot_json = JSON.parse hot_result.response_body
+    cold_json = JSON.parse cold_result.response_body
+    customer_json = JSON.parse customer_result.response_body
+
+    hot_balances = [] 
+    hot_json['balances'].each { |balance|
+      if balance['currency'] == DEFAULT_CURRENCY
+        hot_balances.push balance
+      end
+    }
+
+    cold_balances = []
+    cold_json['balances'].each { |balance|
+      if balance['currency'] == DEFAULT_CURRENCY
+        cold_balances.push balance
+      end
+    }
+
+    customer_balances = []
+    customer_json['balances'].each { |balance|
+      if balance['currency'] == DEFAULT_CURRENCY
+        customer_balances.push balance
+      end
+    }
+
+    {:hot_wallet_balances => hot_balances, :cold_wallet_balances => cold_balances, :customer_wallet_balances => customer_balances}
+
+  end
+
   #### HELPERS ###
 
   private

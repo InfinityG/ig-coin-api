@@ -7,12 +7,14 @@ require './api/routes/cors'
 require './api/routes/tokens'
 require './api/routes/auth'
 require './api/routes/transactions'
+require './api/routes/config'
 
 class ApiApp < Sinatra::Base
 
   #register routes
   #register Sinatra::AuthRoutes
   register Sinatra::CorsRoutes
+  register Sinatra::ConfigRoutes
   register Sinatra::UserRoutes
   register Sinatra::TokenRoutes
   register Sinatra::TransactionRoutes
