@@ -70,10 +70,10 @@ class RippleRestGateway
     {
         :status => json['payment']['state'],
         :result => json['payment']['result'],
-        :ledger_id => json['payment']['ledger'],
+        :ledger_id => json['payment']['ledger'].to_i,
         :ledger_hash => json['payment']['hash'],
         :ledger_timestamp => json['payment']['timestamp'],
-        :amount => json['payment']['destination_amount']['value'],
+        :amount => json['payment']['destination_amount']['value'].to_i,
         :currency => json['payment']['destination_amount']['currency']
     }
 

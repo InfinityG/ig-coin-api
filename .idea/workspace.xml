@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0d92df0-1b27-495b-9fab-52ed5d8b551f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/routes/config.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/services/config_service.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.rb" afterPath="$PROJECT_DIR$/app.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/routes/cors.rb" afterPath="$PROJECT_DIR$/api/routes/cors.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.ru" afterPath="$PROJECT_DIR$/config.ru" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/gateway/ripple_rest_gateway.rb" afterPath="$PROJECT_DIR$/api/gateway/ripple_rest_gateway.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/services/user_service.rb" afterPath="$PROJECT_DIR$/api/services/user_service.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/routes/users.rb" afterPath="$PROJECT_DIR$/api/routes/users.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="amply-api.iws" />
@@ -21,7 +20,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/amply-api@users.coverage" NAME="users Coverage Results" MODIFIED="1409036272459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" MODULE_NAME="amply-api" />
     <SUITE FILE_PATH="coverage/amply-api@config_ru__1_.coverage" NAME="config.ru (1) Coverage Results" MODIFIED="1410793294533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="igcoin-admin" />
-    <SUITE FILE_PATH="coverage/amply-api@config_ru.coverage" NAME="config.ru Coverage Results" MODIFIED="1410963743862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="amply-api" />
+    <SUITE FILE_PATH="coverage/amply-api@config_ru.coverage" NAME="config.ru Coverage Results" MODIFIED="1411055200034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="amply-api" />
     <SUITE FILE_PATH="coverage/amply-api@app.coverage" NAME="app Coverage Results" MODIFIED="1409660188096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="amply-api" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -49,8 +48,8 @@
       <file leaf-file-name="config.ru" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.ru">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="705">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,8 +58,8 @@
       <file leaf-file-name="ripple_rest_gateway.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/gateway/ripple_rest_gateway.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3726708" vertical-offset="1032" max-vertical-offset="2355">
-              <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.79875517" vertical-offset="815" max-vertical-offset="2355">
+              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,18 +68,8 @@
       <file leaf-file-name="cors.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/routes/cors.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="480">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rest_util.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/utils/rest_util.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,8 +78,8 @@
       <file leaf-file-name="transaction_service.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/services/transaction_service.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1005">
-              <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1005">
+              <caret line="43" column="79" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -99,8 +88,8 @@
       <file leaf-file-name="user_service.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/services/user_service.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
-              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="915">
+              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -109,7 +98,7 @@
       <file leaf-file-name="config.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/routes/config.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+            <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="360">
               <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding />
             </state>
@@ -119,7 +108,7 @@
       <file leaf-file-name="config_service.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/services/config_service.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+            <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="375">
               <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding />
             </state>
@@ -129,8 +118,18 @@
       <file leaf-file-name="users.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/routes/users.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2235">
-              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="547" max-vertical-offset="2700">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transactions.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/routes/transactions.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="930">
+              <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -185,22 +184,22 @@
         <option value="$PROJECT_DIR$/../igcoin-admin/Gemfile" />
         <option value="$PROJECT_DIR$/../igcoin-admin/config.ru" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/api/services/user_service.rb" />
-        <option value="$PROJECT_DIR$/api/routes/users.rb" />
         <option value="$PROJECT_DIR$/api/routes/auth.rb" />
-        <option value="$PROJECT_DIR$/config.ru" />
         <option value="$PROJECT_DIR$/api/routes/cors.rb" />
         <option value="$PROJECT_DIR$/app.rb" />
         <option value="$PROJECT_DIR$/api/routes/config.rb" />
         <option value="$PROJECT_DIR$/api/services/config_service.rb" />
+        <option value="$PROJECT_DIR$/api/services/user_service.rb" />
+        <option value="$PROJECT_DIR$/api/routes/users.rb" />
+        <option value="$PROJECT_DIR$/config.ru" />
         <option value="$PROJECT_DIR$/api/gateway/ripple_rest_gateway.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1469" />
+    <option name="x" value="1440" />
     <option name="y" value="22" />
-    <option name="width" value="1381" />
+    <option name="width" value="1440" />
     <option name="height" value="874" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -229,6 +228,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -335,7 +335,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -507,15 +506,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1469" y="22" width="1381" height="874" extended-state="6" />
+    <frame x="1440" y="22" width="1440" height="874" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5891089" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32469136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32592592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27109784" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2746781" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35185185" sideWeight="0.6881259" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42307693" sideWeight="0.30686694" order="7" side_tool="true" content_ui="tabs" />
@@ -523,12 +522,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920793" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35432097" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35432097" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -622,11 +621,26 @@
           <line>95</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/api/services/transaction_service.rb</url>
+          <line>8</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/api/services/transaction_service.rb</url>
+          <line>9</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/api/services/transaction_service.rb</url>
+          <line>11</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="86" />
+      <option name="time" value="93" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -698,8 +712,8 @@
             <node x="" y="">Test::Unit::Assertions</node>
             <node x="" y="">MiniTest::Unit::Guard</node>
             <node x="" y="">UserRepositoryTest</node>
-            <node x="" y="">MiniTest::Unit::Deprecated::Hooks</node>
             <node x="" y="">MiniTest::Unit::Deprecated::HooksCM</node>
+            <node x="" y="">MiniTest::Unit::Deprecated::Hooks</node>
             <node x="" y="">Test::Unit::TestCase</node>
             <node x="" y="">MiniTest::Assertions</node>
           </nodes>
@@ -760,8 +774,8 @@
           <ID>GemDependency</ID>
           <OriginalElement>#amply-api</OriginalElement>
           <nodes>
-            <node x="" y="">addressable</node>
             <node x="" y="">do_sqlite3</node>
+            <node x="" y="">addressable</node>
             <node x="" y="">dm-transactions</node>
             <node x="" y="">rubysl-securerandom</node>
             <node x="" y="">rest-client</node>
@@ -771,8 +785,8 @@
             <node x="" y="">bcrypt</node>
             <node x="" y="">dm-types</node>
             <node x="" y="">json</node>
-            <node x="" y="">data_objects</node>
             <node x="" y="">dm-validations</node>
+            <node x="" y="">data_objects</node>
             <node x="" y="">multi_json</node>
             <node x="" y="">dm-serializer</node>
             <node x="" y="">#amply-api</node>
@@ -785,9 +799,9 @@
             <node x="" y="">dm-core</node>
             <node x="" y="">dm-aggregates</node>
             <node x="" y="">sinatra</node>
-            <node x="" y="">dm-sqlite-adapter</node>
-            <node x="" y="">rack-protection</node>
             <node x="" y="">uuidtools</node>
+            <node x="" y="">rack-protection</node>
+            <node x="" y="">dm-sqlite-adapter</node>
             <node x="" y="">bundler</node>
             <node x="" y="">bcrypt-ruby</node>
             <node x="" y="">dm-timestamps</node>
@@ -971,14 +985,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/transactions.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="930">
-          <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/services/token_service.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="1035">
@@ -987,58 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/services/user_service.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/services/transaction_service.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1005">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/users.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="2235">
-          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/utils/rest_util.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/cors.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="480">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.ru">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="705">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1059,10 +1017,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/services/user_service.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="915">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/cors.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/transactions.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="930">
+          <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/users.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="547" max-vertical-offset="2700">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.ru">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/services/transaction_service.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1005">
+          <caret line="43" column="79" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/gateway/ripple_rest_gateway.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3726708" vertical-offset="1032" max-vertical-offset="2355">
-          <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.79875517" vertical-offset="815" max-vertical-offset="2355">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
           <folding />
         </state>
       </provider>

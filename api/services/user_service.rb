@@ -19,7 +19,7 @@ class UserService
 
   #TODO: refactor this to handle paging
   def get_all
-    User.all
+    User.all(:order => [ :last_name.asc ])
   end
 
   def get_by_id(user_id)
