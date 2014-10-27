@@ -123,7 +123,7 @@ module Sinatra
 
         if user != nil
           transaction_service = TransactionService.new
-          item = transaction_service.get_transaction_by_id params[:user_id], params[:transaction_id]
+          item = transaction_service.get_transaction params[:transaction_id], params[:user_id]
           response = {:id => item[:id], :user_id => item[:user_id], :amount => item[:amount],
                       :currency => item[:currency], :timestamp => item[:ledger_timestamp], :type => item[:type]}
           return response.to_json

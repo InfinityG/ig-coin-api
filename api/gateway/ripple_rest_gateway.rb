@@ -46,21 +46,21 @@ class RippleRestGateway
     URI(json['status_url']).path
   end
 
-  def prepare_deposit(tag, amount)
+  def prepare_deposit(tag, amount, memo)
     #destination_amount = amount+currency+issuer (issuer is the cold wallet)
     destination_amount = "#{amount}+#{DEFAULT_CURRENCY}+#{GATEWAY_COLD_WALLET_ADDRESS}"
     uri = "#{RIPPLE_REST_URI}/v1/accounts/#{GATEWAY_HOT_WALLET_ADDRESS}/payments/paths/#{CUSTOMER_WALLET_ADDRESS}/#{destination_amount}"
 
-    execute_preparation_request uri, tag
+    execute_preparation_request uri, tag, memo
   end
 
   # from customer wallet to gateway wallet
-  def prepare_withdrawal(tag, amount)
+  def prepare_withdrawal(tag, amount, memo)
     #destination_amount = amount+currency+issuer (issuer is the cold wallet)
     destination_amount = "#{amount}+#{DEFAULT_CURRENCY}+#{GATEWAY_COLD_WALLET_ADDRESS}"
     uri = "#{RIPPLE_REST_URI}/v1/accounts/#{CUSTOMER_WALLET_ADDRESS}/payments/paths/#{GATEWAY_HOT_WALLET_ADDRESS}/#{destination_amount}"
 
-    execute_preparation_request uri, tag
+    execute_preparation_request uri, tag, memo
   end
 
   def confirm_transaction(status_path)
@@ -121,12 +121,12 @@ class RippleRestGateway
   #### HELPERS ###
 
   private
-  def execute_preparation_request(uri, tag)
+  def execute_preparation_request(uri, tag, memo)
     result = rest_util_instance.execute_get uri
     json = JSON.parse result.response_body
 
     if json['success']
-      return update_payment_details json, tag
+      return update_payment_details json, tag, memo
     end
 
     raise 'Payment preparation unsuccessful!'
@@ -134,12 +134,13 @@ class RippleRestGateway
   end
 
   private
-  def update_payment_details(json, tag)
+  def update_payment_details(json, tag, memo)
     payment = json['payments'][0]
     payment['source_tag'] = tag
     payment['source_amount']['issuer'] = GATEWAY_COLD_WALLET_ADDRESS
     payment['destination_tag'] = tag
     payment['destination_amount']['issuer'] = GATEWAY_COLD_WALLET_ADDRESS
+    payment['memos'] = [{:MemoType => 'Payment description', :MemoData => memo}] #TODO: check this works!
     payment
   end
 

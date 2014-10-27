@@ -1,62 +1,60 @@
 require './api/gateway/ripple_rest_gateway'
 require './api/utils/hash_generator'
-require './api/models/transaction'
+require './api/repositories/transaction_repository'
 
 class TransactionService
-  def execute_deposit(user, amount)
+
+  def execute_deposit(user, amount, memo)
     ripple_gateway = RippleRestGateway.new
     client_resource_id = HashGenerator.new.generate_uuid
-    payment = ripple_gateway.prepare_deposit user[:id].to_s, amount
+    payment = ripple_gateway.prepare_deposit user[:id].to_s, amount, memo
     status_url = ripple_gateway.create_deposit(client_resource_id, payment)
 
-    sleep 5 #TODO: break this out into a separate process
-
-    confirmation_result = ripple_gateway.confirm_transaction "#{RIPPLE_REST_URI}#{status_url}"
-    save_transaction user, confirmation_result, client_resource_id, 'deposit'
+    transaction_repository = TransactionRepository.new
+    transaction_repository.save_transaction user[:id].to_s, client_resource_id, 'deposit', amount,
+                                         DEFAULT_CURRENCY, "#{RIPPLE_REST_URI}#{status_url}"
 
   end
 
-  def execute_withdrawal(user, amount)
+  def execute_withdrawal(user, amount, memo)
     ripple_gateway = RippleRestGateway.new
     client_resource_id = HashGenerator.new.generate_uuid
-    payment = ripple_gateway.prepare_withdrawal user[:id].to_s, amount
+    payment = ripple_gateway.prepare_withdrawal user[:id].to_s, amount, memo
     status_url = ripple_gateway.create_withdrawal(client_resource_id, payment)
 
-    sleep 5
-
-    confirmation_result = ripple_gateway.confirm_transaction "#{RIPPLE_REST_URI}#{status_url}"
-    save_transaction user, confirmation_result, client_resource_id, 'withdrawal'
-
+    transaction_repository = TransactionRepository.new
+    transaction_repository.save_transaction user[:id].to_s, client_resource_id, 'withdrawal', amount,
+                                         DEFAULT_CURRENCY, "#{RIPPLE_REST_URI}#{status_url}"
   end
 
   def get_transactions(user_id)
-    Transaction.all(:user_id => user_id)
+    repository = TransactionRepository.new
+    repository.get_transactions(user_id)
     end
 
-  def get_transaction_by_id(user_id, transaction_id)
-    Transaction.all(:id => transaction_id, :user_id => user_id).first
+  def get_transaction(transaction_id, user_id = nil)
+    repository = TransactionRepository.new
+
+    if user_id == nil
+      repository.get_transaction(transaction_id)
+    else
+      repository.get_transaction_by_user_id(user_id, transaction_id)
+    end
   end
 
-  private
-  def save_transaction(user, confirmation_result, resource_id, type)
-    transaction = Transaction.new(:user_id => user.id,
-                                  :resource_id => resource_id,
-                                  :ledger_id => confirmation_result[:ledger_id],
-                                  :ledger_hash => confirmation_result[:ledger_hash],
-                                  :ledger_timestamp => confirmation_result[:ledger_timestamp],
-                                  :amount => confirmation_result[:amount],
-                                  :currency => confirmation_result[:currency],
-                                  :type => type, :status => confirmation_result[:status])
+  def get_pending_transactions
+    repository = TransactionRepository.new
+    repository.get_transactions_by_status 'pending'
+  end
 
-    if transaction.save
-      transaction
-    else
-      transaction.errors.each do |e|
-        puts e
-      end
-      raise 'Error saving transaction!'
-    end
+  def save_transaction(user_id, resource_id, type, amount, currency, confirmation_url)
+    repository = TransactionRepository.new
+    repository.save_transaction user_id, resource_id, type, amount, currency, confirmation_url
+  end
 
+  def confirm_transaction(transaction_id, confirmation_result)
+    repository = TransactionRepository.new
+    repository.confirm_transaction transaction_id, confirmation_result
   end
 
 end

@@ -11,13 +11,14 @@ module Sinatra
         data = JSON.parse(request.body.read)
         user_id = data['user_id']
         amount = data['amount']
+        memo = data['memo']
 
         if user_id.to_s != '' && amount.to_i > 0
           #check this is a valid user
           user = UserService.new.get_by_id user_id
 
           if user != nil
-            result = TransactionService.new.execute_deposit(user, amount)
+            result = TransactionService.new.execute_deposit(user, amount, memo)
 
             status 200 # not 201 as this has just been submitted.
             return {:transaction_id => result[:id]}.to_json
@@ -34,13 +35,14 @@ module Sinatra
         data = JSON.parse(request.body.read)
         user_id = data['user_id']
         amount = data['amount']
+        memo = data['memo']
 
         if user_id.to_s != '' && amount.to_i > 0
           #check this is a valid user
           user = UserService.new.get_by_id user_id
 
           if user != nil
-            result = TransactionService.new.execute_withdrawal(user, amount)
+            result = TransactionService.new.execute_withdrawal(user, amount, memo)
 
             status 200 # not 201 as this has just been submitted.
             return {:transaction_id => result[:id]}.to_json
